@@ -36,3 +36,8 @@ When the app refreshes, the task list will be empty. Without the autopublish pac
 
 Meteor.publish: allows the data to be published from the server to the client;
 Meteor.subscribe: allows the client code to ask for data to the client.
+
+
+
+Mocha Test Command?
+meteor test --driver-package meteortesting:mocha
