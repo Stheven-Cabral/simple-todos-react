@@ -1,0 +1,38 @@
+8.1: Disable Quick Prototyping
+Every newly created Meteor project has the insecure package installed by default.
+
+This package allows us to edit the database from the client as we said above, which is useful for quick prototyping.
+
+We need to remove it, because as the name suggests it is insecure.
+
+meteor remove insecure
+Now your app changes don’t work anymore as you have revoked all client-side database permissions. Try to insert a new task for example, you are going to see insert failed: Access denied in your browser console.
+
+
+
+Optimistic UI
+When we call a method on the client using Meteor.call, two things happen in parallel:
+
+The client sends a request to the sever to run the method in a secure environment.
+A simulation of the method runs directly on the client trying to predict the outcome of the call.
+This means that a newly created task actually appears on the screen before the result comes back from the server.
+
+If the result matches that of the server everything remains as is, otherwise the UI gets patched to reflect the actual state of the server.
+
+Meteor does all this work for you, you don’t need to worry about it but it’s important to understand what is happening. You can read more about Optimistic UI here.
+
+
+
+How do you add meteor specific packages?
+meteor add <package-name>
+
+
+
+9.1: autopublish
+Just like with insecure in the last step, all new Meteor apps start with the autopublish package, which automatically synchronizes all the database contents to the client. So you should remove it:
+
+meteor remove autopublish
+When the app refreshes, the task list will be empty. Without the autopublish package, we will have to specify explicitly what the server sends to the client. The functions in Meteor that do this are Meteor.publish and Meteor.subscribe:
+
+Meteor.publish: allows the data to be published from the server to the client;
+Meteor.subscribe: allows the client code to ask for data to the client.
